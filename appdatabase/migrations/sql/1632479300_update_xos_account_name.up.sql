@@ -1,0 +1,1 @@
+update accounts set name='GOD account' where name='XOS account';
