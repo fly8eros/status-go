@@ -40,6 +40,7 @@
 // 1618395756_contacts_only.up.sql (136B)
 // 1622184614_add_default_sync_period.up.sql (125B)
 // 1632479300_update_xos_account_name.up.sql (64B)
+// 1632486176_update_xos_account_name.up.sql (121B)
 // doc.go (74B)
 
 package migrations
@@ -909,6 +910,26 @@ func _1632479300_update_xos_account_nameUpSql() (*asset, error) {
 	return a, nil
 }
 
+var __1632486176_update_xos_account_nameUpSql = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x2a\x2d\x48\x49\x2c\x49\x55\x48\x4c\x4e\xce\x2f\xcd\x2b\x29\x56\x28\x4e\x2d\x51\xc8\x4b\xcc\x4d\xb5\x55\x77\xf7\x77\x79\xba\x63\xc2\xb3\x8e\xed\xea\x0a\xe5\x19\xa9\x45\xa9\x50\xe1\x08\xff\x60\xa8\xb0\x35\x17\x5e\xcd\x2f\x36\xaf\x79\xd6\xb1\x0d\x43\x33\x54\xd8\x1a\x10\x00\x00\xff\xff\x81\x95\xe0\x11\x79\x00\x00\x00")
+
+func _1632486176_update_xos_account_nameUpSqlBytes() ([]byte, error) {
+	return bindataRead(
+		__1632486176_update_xos_account_nameUpSql,
+		"1632486176_update_xos_account_name.up.sql",
+	)
+}
+
+func _1632486176_update_xos_account_nameUpSql() (*asset, error) {
+	bytes, err := _1632486176_update_xos_account_nameUpSqlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "1632486176_update_xos_account_name.up.sql", size: 121, mode: os.FileMode(0644), modTime: time.Unix(1632486316, 0)}
+	a := &asset{bytes: bytes, info: info, digest: [32]uint8{0x97, 0x76, 0xaa, 0x77, 0x56, 0xdc, 0x57, 0x7a, 0x17, 0x9d, 0xe1, 0x65, 0x17, 0xee, 0xd6, 0xf9, 0x6b, 0x30, 0x59, 0xc8, 0xeb, 0xce, 0x35, 0xaa, 0x58, 0x43, 0x9f, 0x31, 0xef, 0x3, 0x90, 0xe9}}
+	return a, nil
+}
+
 var _docGo = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x2c\xc9\xb1\x0d\xc4\x20\x0c\x05\xd0\x9e\x29\xfe\x02\xd8\xfd\x6d\xe3\x4b\xac\x2f\x44\x82\x09\x78\x7f\xa5\x49\xfd\xa6\x1d\xdd\xe8\xd8\xcf\x55\x8a\x2a\xe3\x47\x1f\xbe\x2c\x1d\x8c\xfa\x6f\xe3\xb4\x34\xd4\xd9\x89\xbb\x71\x59\xb6\x18\x1b\x35\x20\xa2\x9f\x0a\x03\xa2\xe5\x0d\x00\x00\xff\xff\x60\xcd\x06\xbe\x4a\x00\x00\x00")
 
 func docGoBytes() ([]byte, error) {
@@ -1100,6 +1121,8 @@ var _bindata = map[string]func() (*asset, error){
 
 	"1632479300_update_xos_account_name.up.sql": _1632479300_update_xos_account_nameUpSql,
 
+	"1632486176_update_xos_account_name.up.sql": _1632486176_update_xos_account_nameUpSql,
+
 	"doc.go": docGo,
 }
 
@@ -1184,6 +1207,7 @@ var _bintree = &bintree{nil, map[string]*bintree{
 	"1618395756_contacts_only.up.sql":                     &bintree{_1618395756_contacts_onlyUpSql, map[string]*bintree{}},
 	"1622184614_add_default_sync_period.up.sql":           &bintree{_1622184614_add_default_sync_periodUpSql, map[string]*bintree{}},
 	"1632479300_update_xos_account_name.up.sql":           &bintree{_1632479300_update_xos_account_nameUpSql, map[string]*bintree{}},
+	"1632486176_update_xos_account_name.up.sql":           &bintree{_1632486176_update_xos_account_nameUpSql, map[string]*bintree{}},
 	"doc.go": &bintree{docGo, map[string]*bintree{}},
 }}
 
