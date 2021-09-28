@@ -328,7 +328,7 @@ func findFirstRange(c context.Context, account common.Address, initialTo *big.In
 		}
 		nonceDiff = firstNonce - fromNonce
 
-		log.Info("next nonce", "from", from, "n", fromNonce, "diff", firstNonce-fromNonce)
+		log.Info("next nonce", "from", from, "fromNonce", fromNonce, "diff", nonceDiff)
 
 		if goal <= nonceDiff && nonceDiff <= (goal+5) {
 			log.Info("range found", "account", account, "from", from, "to", to)
@@ -336,7 +336,7 @@ func findFirstRange(c context.Context, account common.Address, initialTo *big.In
 		}
 	}
 
-	log.Info("range found", "account", account, "from", from, "to", to)
+	log.Info("range found after 50 iterations", "account", account, "from", from, "to", to, "lastNonceDiff", nonceDiff)
 
 	return from, nil
 }
