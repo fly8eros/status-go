@@ -41,6 +41,8 @@
 // 1622184614_add_default_sync_period.up.sql (125B)
 // 1632479300_update_xos_account_name.up.sql (64B)
 // 1632486176_update_xos_account_name.up.sql (121B)
+// 1633061090_upstream_url.up.sql (118B)
+// 1633061091_update_network_to_wallet_rpc.up.sql (112B)
 // doc.go (74B)
 
 package migrations
@@ -930,6 +932,46 @@ func _1632486176_update_xos_account_nameUpSql() (*asset, error) {
 	return a, nil
 }
 
+var __1633061090_upstream_urlUpSql = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x2a\x2d\x48\x49\x2c\x49\x55\x28\x4e\x2d\x29\xc9\xcc\x4b\x2f\x06\x31\x14\xf2\xf2\x53\x52\xe3\x93\xf3\xf3\xd2\x32\xd3\x6d\x8b\x52\x0b\x72\x12\x93\x53\x35\x90\xc4\x74\xd4\x33\x4a\x4a\x0a\x8a\xad\xf4\xf5\x73\x13\x33\xf3\xf2\x52\x4b\xf4\x52\x8b\xf2\x8b\xf5\xd2\x4a\xf3\x52\xd4\x11\x72\xe5\x89\x39\x39\xa9\x25\xba\x45\x05\xc9\x08\x69\x2b\x0b\x53\x13\x53\x75\x4d\x6b\x2e\x40\x00\x00\x00\xff\xff\x8a\x27\x7b\x55\x76\x00\x00\x00")
+
+func _1633061090_upstream_urlUpSqlBytes() ([]byte, error) {
+	return bindataRead(
+		__1633061090_upstream_urlUpSql,
+		"1633061090_upstream_url.up.sql",
+	)
+}
+
+func _1633061090_upstream_urlUpSql() (*asset, error) {
+	bytes, err := _1633061090_upstream_urlUpSqlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "1633061090_upstream_url.up.sql", size: 118, mode: os.FileMode(0644), modTime: time.Unix(1633062342, 0)}
+	a := &asset{bytes: bytes, info: info, digest: [32]uint8{0x7b, 0x97, 0x61, 0x8b, 0x3d, 0x7, 0xc4, 0xef, 0x4b, 0x4, 0xa6, 0x34, 0xa1, 0xee, 0xc9, 0x60, 0x80, 0x4e, 0xc9, 0x55, 0x5e, 0xbb, 0xb3, 0xf7, 0xb0, 0x62, 0x68, 0x96, 0xa3, 0x45, 0x74, 0x52}}
+	return a, nil
+}
+
+var __1633061091_update_network_to_wallet_rpcUpSql = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x2a\x2d\x48\x49\x2c\x49\x55\x28\x4e\x2d\x29\xc9\xcc\x4b\x2f\x06\x31\x14\xf2\x52\x4b\xca\xf3\x8b\xb2\x8b\x6d\x8b\x52\x0b\x72\x12\x93\x53\x35\x60\x02\x3a\xea\x19\x25\x25\x05\xc5\x56\xfa\xfa\xb9\x89\x99\x79\x79\xa9\x25\x7a\xa9\x45\xf9\xc5\x7a\x69\xa5\x79\x29\xea\x08\xb9\xf2\xc4\x9c\x9c\xd4\x12\xdd\xa2\x82\x64\x84\xb4\x95\x85\xa9\x89\xa9\xba\xa6\x35\x17\x20\x00\x00\xff\xff\x8f\x4c\x69\x7d\x70\x00\x00\x00")
+
+func _1633061091_update_network_to_wallet_rpcUpSqlBytes() ([]byte, error) {
+	return bindataRead(
+		__1633061091_update_network_to_wallet_rpcUpSql,
+		"1633061091_update_network_to_wallet_rpc.up.sql",
+	)
+}
+
+func _1633061091_update_network_to_wallet_rpcUpSql() (*asset, error) {
+	bytes, err := _1633061091_update_network_to_wallet_rpcUpSqlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "1633061091_update_network_to_wallet_rpc.up.sql", size: 112, mode: os.FileMode(0644), modTime: time.Unix(1633062496, 0)}
+	a := &asset{bytes: bytes, info: info, digest: [32]uint8{0x64, 0xc4, 0xf3, 0x2a, 0x44, 0xb6, 0xd6, 0x87, 0xb0, 0x9b, 0x9b, 0x73, 0xbe, 0x82, 0xe0, 0xf8, 0xee, 0x28, 0xed, 0xea, 0x31, 0x33, 0x2f, 0xa3, 0x75, 0x92, 0xb7, 0x1a, 0xb7, 0x20, 0x7f, 0xe8}}
+	return a, nil
+}
+
 var _docGo = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x2c\xc9\xb1\x0d\xc4\x20\x0c\x05\xd0\x9e\x29\xfe\x02\xd8\xfd\x6d\xe3\x4b\xac\x2f\x44\x82\x09\x78\x7f\xa5\x49\xfd\xa6\x1d\xdd\xe8\xd8\xcf\x55\x8a\x2a\xe3\x47\x1f\xbe\x2c\x1d\x8c\xfa\x6f\xe3\xb4\x34\xd4\xd9\x89\xbb\x71\x59\xb6\x18\x1b\x35\x20\xa2\x9f\x0a\x03\xa2\xe5\x0d\x00\x00\xff\xff\x60\xcd\x06\xbe\x4a\x00\x00\x00")
 
 func docGoBytes() ([]byte, error) {
@@ -1123,6 +1165,10 @@ var _bindata = map[string]func() (*asset, error){
 
 	"1632486176_update_xos_account_name.up.sql": _1632486176_update_xos_account_nameUpSql,
 
+	"1633061090_upstream_url.up.sql": _1633061090_upstream_urlUpSql,
+
+	"1633061091_update_network_to_wallet_rpc.up.sql": _1633061091_update_network_to_wallet_rpcUpSql,
+
 	"doc.go": docGo,
 }
 
@@ -1208,6 +1254,8 @@ var _bintree = &bintree{nil, map[string]*bintree{
 	"1622184614_add_default_sync_period.up.sql":           &bintree{_1622184614_add_default_sync_periodUpSql, map[string]*bintree{}},
 	"1632479300_update_xos_account_name.up.sql":           &bintree{_1632479300_update_xos_account_nameUpSql, map[string]*bintree{}},
 	"1632486176_update_xos_account_name.up.sql":           &bintree{_1632486176_update_xos_account_nameUpSql, map[string]*bintree{}},
+	"1633061090_upstream_url.up.sql":                      &bintree{_1633061090_upstream_urlUpSql, map[string]*bintree{}},
+	"1633061091_update_network_to_wallet_rpc.up.sql":      &bintree{_1633061091_update_network_to_wallet_rpcUpSql, map[string]*bintree{}},
 	"doc.go": &bintree{docGo, map[string]*bintree{}},
 }}
 
