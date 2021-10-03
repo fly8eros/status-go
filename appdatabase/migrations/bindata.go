@@ -43,7 +43,8 @@
 // 1632486176_update_xos_account_name.up.sql (121B)
 // 1633061090_upstream_url.up.sql (118B)
 // 1633061091_update_network_to_wallet_rpc.up.sql (112B)
-// 1633061092_clean_wallet.up.sql (112B)
+// 1633061092_clean_wallet.up.sql (0)
+// 1633061093_clean_wallet.up.sql (0)
 // doc.go (74B)
 
 package migrations
@@ -973,7 +974,7 @@ func _1633061091_update_network_to_wallet_rpcUpSql() (*asset, error) {
 	return a, nil
 }
 
-var __1633061092_clean_walletUpSql = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x2a\x2d\x48\x49\x2c\x49\x55\x28\x4e\x2d\x29\xc9\xcc\x4b\x2f\x06\x31\x14\xf2\x52\x4b\xca\xf3\x8b\xb2\x8b\x6d\x8b\x52\x0b\x72\x12\x93\x53\x35\x60\x02\x3a\xea\x19\x25\x25\x05\xc5\x56\xfa\xfa\xb9\x89\x99\x79\x79\xa9\x25\x7a\xa9\x45\xf9\xc5\x7a\x69\xa5\x79\x29\xea\x08\xb9\xf2\xc4\x9c\x9c\xd4\x12\xdd\xa2\x82\x64\x84\xb4\x95\x85\xa9\x89\xa9\xba\xa6\x35\x17\x20\x00\x00\xff\xff\x8f\x4c\x69\x7d\x70\x00\x00\x00")
+var __1633061092_clean_walletUpSql = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x01\x00\x00\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00")
 
 func _1633061092_clean_walletUpSqlBytes() ([]byte, error) {
 	return bindataRead(
@@ -988,8 +989,28 @@ func _1633061092_clean_walletUpSql() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "1633061092_clean_wallet.up.sql", size: 112, mode: os.FileMode(0644), modTime: time.Unix(1633062496, 0)}
-	a := &asset{bytes: bytes, info: info, digest: [32]uint8{0x64, 0xc4, 0xf3, 0x2a, 0x44, 0xb6, 0xd6, 0x87, 0xb0, 0x9b, 0x9b, 0x73, 0xbe, 0x82, 0xe0, 0xf8, 0xee, 0x28, 0xed, 0xea, 0x31, 0x33, 0x2f, 0xa3, 0x75, 0x92, 0xb7, 0x1a, 0xb7, 0x20, 0x7f, 0xe8}}
+	info := bindataFileInfo{name: "1633061092_clean_wallet.up.sql", size: 0, mode: os.FileMode(0644), modTime: time.Unix(1633278753, 0)}
+	a := &asset{bytes: bytes, info: info, digest: [32]uint8{0xe3, 0xb0, 0xc4, 0x42, 0x98, 0xfc, 0x1c, 0x14, 0x9a, 0xfb, 0xf4, 0xc8, 0x99, 0x6f, 0xb9, 0x24, 0x27, 0xae, 0x41, 0xe4, 0x64, 0x9b, 0x93, 0x4c, 0xa4, 0x95, 0x99, 0x1b, 0x78, 0x52, 0xb8, 0x55}}
+	return a, nil
+}
+
+var __1633061093_clean_walletUpSql = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x01\x00\x00\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00")
+
+func _1633061093_clean_walletUpSqlBytes() ([]byte, error) {
+	return bindataRead(
+		__1633061093_clean_walletUpSql,
+		"1633061093_clean_wallet.up.sql",
+	)
+}
+
+func _1633061093_clean_walletUpSql() (*asset, error) {
+	bytes, err := _1633061093_clean_walletUpSqlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "1633061093_clean_wallet.up.sql", size: 0, mode: os.FileMode(0644), modTime: time.Unix(1633278753, 0)}
+	a := &asset{bytes: bytes, info: info, digest: [32]uint8{0xe3, 0xb0, 0xc4, 0x42, 0x98, 0xfc, 0x1c, 0x14, 0x9a, 0xfb, 0xf4, 0xc8, 0x99, 0x6f, 0xb9, 0x24, 0x27, 0xae, 0x41, 0xe4, 0x64, 0x9b, 0x93, 0x4c, 0xa4, 0x95, 0x99, 0x1b, 0x78, 0x52, 0xb8, 0x55}}
 	return a, nil
 }
 
@@ -1192,6 +1213,8 @@ var _bindata = map[string]func() (*asset, error){
 
 	"1633061092_clean_wallet.up.sql": _1633061092_clean_walletUpSql,
 
+	"1633061093_clean_wallet.up.sql": _1633061093_clean_walletUpSql,
+
 	"doc.go": docGo,
 }
 
@@ -1280,6 +1303,7 @@ var _bintree = &bintree{nil, map[string]*bintree{
 	"1633061090_upstream_url.up.sql":                      &bintree{_1633061090_upstream_urlUpSql, map[string]*bintree{}},
 	"1633061091_update_network_to_wallet_rpc.up.sql":      &bintree{_1633061091_update_network_to_wallet_rpcUpSql, map[string]*bintree{}},
 	"1633061092_clean_wallet.up.sql":                      &bintree{_1633061092_clean_walletUpSql, map[string]*bintree{}},
+	"1633061093_clean_wallet.up.sql":                      &bintree{_1633061093_clean_walletUpSql, map[string]*bintree{}},
 	"doc.go":                                              &bintree{docGo, map[string]*bintree{}},
 }}
 
