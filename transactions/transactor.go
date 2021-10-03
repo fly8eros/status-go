@@ -336,7 +336,7 @@ func (t *Transactor) buildTransactionWithOverrides(nonce uint64, value *big.Int,
 
 	if args.To != nil {
 		tx = gethtypes.NewTransaction(nonce, common.Address(*args.To), value, gas, gasPrice, args.GetInput())
-		t.logNewTx(args, gas, gasPrice, value)
+		t.logNewTx(args, gas, gasPrice, value, nonce)
 	} else {
 		tx = gethtypes.NewContractCreation(nonce, value, gas, gasPrice, args.GetInput())
 		t.logNewContract(args, gas, gasPrice, value, nonce)
@@ -375,13 +375,14 @@ func (t *Transactor) getTransactionNonce(args SendTxArgs) (newNonce uint64, err 
 	return newNonce, nil
 }
 
-func (t *Transactor) logNewTx(args SendTxArgs, gas uint64, gasPrice *big.Int, value *big.Int) {
+func (t *Transactor) logNewTx(args SendTxArgs, gas uint64, gasPrice *big.Int, value *big.Int,nonce uint64) {
 	t.log.Info("New transaction",
 		"From", args.From,
 		"To", *args.To,
 		"Gas", gas,
 		"GasPrice", gasPrice,
 		"Value", value,
+		"Nonce", nonce,
 	)
 }
 
@@ -392,5 +393,6 @@ func (t *Transactor) logNewContract(args SendTxArgs, gas uint64, gasPrice *big.I
 		"GasPrice", gasPrice,
 		"Value", value,
 		"Contract address", crypto.CreateAddress(args.From, nonce),
+		"Nonce", nonce,
 	)
 }
