@@ -1083,7 +1083,7 @@ func updateOrInsertTransfers(creator statementCreator, network uint64, transfers
 		if err != nil {
 			fkErr := strings.Contains(err.Error(),"FOREIGN KEY constraint failed")
 			if fkErr {
-				res, err = updateBlocks.Exec(t.BlockHash, t.Address, t.BlockNumber, network)
+				res, err = updateBlocks.Exec(t.BlockHash, t.Address, (*SQLBigInt)(t.BlockNumber), network)
 				if err != nil {
 					return err
 				}
@@ -1091,7 +1091,7 @@ func updateOrInsertTransfers(creator statementCreator, network uint64, transfers
 				if err != nil {
 					return err
 				}
-				log.Info("try to fix `foreign key constraint failed`.","affected", affected, "b-hash", t.BlockHash, "b-n", t.BlockNumber, "a", t.Address, "h", t.ID)
+				log.Info("try to fix `foreign key constraint failed`.","affected", affected, "network", network, "b-hash", t.BlockHash, "b-n", t.BlockNumber, "a", t.Address, "h", t.ID)
 
 				_, err = insert.Exec(network, t.ID, t.BlockHash, (*SQLBigInt)(t.BlockNumber), t.Timestamp, t.Address, &JSONBlob{t.Transaction}, t.From, &JSONBlob{t.Receipt}, &JSONBlob{t.Log}, t.Type)
 				if err == nil {
