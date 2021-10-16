@@ -47,7 +47,7 @@
 // 1633061093_clean_wallet.up.sql (0)
 // 1633061094_add_network_bsc_heco.up.sql (2.802kB)
 // 1633061095_add_network_ethereum.up.sql (2.039kB)
-// 1633061096_update_current_network_to_mainnet.up.sql (51B)
+// 1633061096_update_current_network_to_mainnet.up.sql (0)
 // doc.go (74B)
 
 package migrations
@@ -1057,7 +1057,7 @@ func _1633061095_add_network_ethereumUpSql() (*asset, error) {
 	return a, nil
 }
 
-var __1633061096_update_current_network_to_mainnetUpSql = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x2a\x2d\x48\x49\x2c\x49\x55\x28\x4e\x2d\x29\xc9\xcc\x4b\x2f\x06\x31\x14\x92\x4b\x8b\x8a\x52\xf3\x4a\xe2\xf3\x52\x4b\xca\xf3\x8b\xb2\x6d\xd5\x73\x13\x33\xf3\xf2\x52\x4b\xe2\x8b\x0a\x92\xd5\xad\xb9\x00\x01\x00\x00\xff\xff\x5f\x09\x67\xb1\x33\x00\x00\x00")
+var __1633061096_update_current_network_to_mainnetUpSql = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x01\x00\x00\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00")
 
 func _1633061096_update_current_network_to_mainnetUpSqlBytes() ([]byte, error) {
 	return bindataRead(
@@ -1072,8 +1072,8 @@ func _1633061096_update_current_network_to_mainnetUpSql() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "1633061096_update_current_network_to_mainnet.up.sql", size: 51, mode: os.FileMode(0644), modTime: time.Unix(1634354602, 0)}
-	a := &asset{bytes: bytes, info: info, digest: [32]uint8{0x46, 0xca, 0xbd, 0xea, 0x51, 0x8c, 0xe2, 0x97, 0xac, 0x88, 0x2c, 0x37, 0xc9, 0xee, 0xdb, 0x9f, 0xe3, 0x9e, 0x9d, 0xf1, 0x18, 0x38, 0xc1, 0x5a, 0x4, 0x15, 0x5b, 0x70, 0xa5, 0xb9, 0x90, 0xfd}}
+	info := bindataFileInfo{name: "1633061096_update_current_network_to_mainnet.up.sql", size: 0, mode: os.FileMode(0644), modTime: time.Unix(1634358788, 0)}
+	a := &asset{bytes: bytes, info: info, digest: [32]uint8{0xe3, 0xb0, 0xc4, 0x42, 0x98, 0xfc, 0x1c, 0x14, 0x9a, 0xfb, 0xf4, 0xc8, 0x99, 0x6f, 0xb9, 0x24, 0x27, 0xae, 0x41, 0xe4, 0x64, 0x9b, 0x93, 0x4c, 0xa4, 0x95, 0x99, 0x1b, 0x78, 0x52, 0xb8, 0x55}}
 	return a, nil
 }
 
