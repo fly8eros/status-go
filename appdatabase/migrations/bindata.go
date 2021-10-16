@@ -47,6 +47,7 @@
 // 1633061093_clean_wallet.up.sql (0)
 // 1633061094_add_network_bsc_heco.up.sql (2.802kB)
 // 1633061095_add_network_ethereum.up.sql (2.039kB)
+// 1633061096_update_current_network_to_mainnet.up.sql (51B)
 // doc.go (74B)
 
 package migrations
@@ -1056,6 +1057,26 @@ func _1633061095_add_network_ethereumUpSql() (*asset, error) {
 	return a, nil
 }
 
+var __1633061096_update_current_network_to_mainnetUpSql = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x2a\x2d\x48\x49\x2c\x49\x55\x28\x4e\x2d\x29\xc9\xcc\x4b\x2f\x06\x31\x14\x92\x4b\x8b\x8a\x52\xf3\x4a\xe2\xf3\x52\x4b\xca\xf3\x8b\xb2\x6d\xd5\x73\x13\x33\xf3\xf2\x52\x4b\xe2\x8b\x0a\x92\xd5\xad\xb9\x00\x01\x00\x00\xff\xff\x5f\x09\x67\xb1\x33\x00\x00\x00")
+
+func _1633061096_update_current_network_to_mainnetUpSqlBytes() ([]byte, error) {
+	return bindataRead(
+		__1633061096_update_current_network_to_mainnetUpSql,
+		"1633061096_update_current_network_to_mainnet.up.sql",
+	)
+}
+
+func _1633061096_update_current_network_to_mainnetUpSql() (*asset, error) {
+	bytes, err := _1633061096_update_current_network_to_mainnetUpSqlBytes()
+	if err != nil {
+		return nil, err
+	}
+
+	info := bindataFileInfo{name: "1633061096_update_current_network_to_mainnet.up.sql", size: 51, mode: os.FileMode(0644), modTime: time.Unix(1634354602, 0)}
+	a := &asset{bytes: bytes, info: info, digest: [32]uint8{0x46, 0xca, 0xbd, 0xea, 0x51, 0x8c, 0xe2, 0x97, 0xac, 0x88, 0x2c, 0x37, 0xc9, 0xee, 0xdb, 0x9f, 0xe3, 0x9e, 0x9d, 0xf1, 0x18, 0x38, 0xc1, 0x5a, 0x4, 0x15, 0x5b, 0x70, 0xa5, 0xb9, 0x90, 0xfd}}
+	return a, nil
+}
+
 var _docGo = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\x2c\xc9\xb1\x0d\xc4\x20\x0c\x05\xd0\x9e\x29\xfe\x02\xd8\xfd\x6d\xe3\x4b\xac\x2f\x44\x82\x09\x78\x7f\xa5\x49\xfd\xa6\x1d\xdd\xe8\xd8\xcf\x55\x8a\x2a\xe3\x47\x1f\xbe\x2c\x1d\x8c\xfa\x6f\xe3\xb4\x34\xd4\xd9\x89\xbb\x71\x59\xb6\x18\x1b\x35\x20\xa2\x9f\x0a\x03\xa2\xe5\x0d\x00\x00\xff\xff\x60\xcd\x06\xbe\x4a\x00\x00\x00")
 
 func docGoBytes() ([]byte, error) {
@@ -1261,6 +1282,8 @@ var _bindata = map[string]func() (*asset, error){
 
 	"1633061095_add_network_ethereum.up.sql": _1633061095_add_network_ethereumUpSql,
 
+	"1633061096_update_current_network_to_mainnet.up.sql": _1633061096_update_current_network_to_mainnetUpSql,
+
 	"doc.go": docGo,
 }
 
@@ -1352,7 +1375,8 @@ var _bintree = &bintree{nil, map[string]*bintree{
 	"1633061093_clean_wallet.up.sql":                      &bintree{_1633061093_clean_walletUpSql, map[string]*bintree{}},
 	"1633061094_add_network_bsc_heco.up.sql":              &bintree{_1633061094_add_network_bsc_hecoUpSql, map[string]*bintree{}},
 	"1633061095_add_network_ethereum.up.sql":              &bintree{_1633061095_add_network_ethereumUpSql, map[string]*bintree{}},
-	"doc.go":                                              &bintree{docGo, map[string]*bintree{}},
+	"1633061096_update_current_network_to_mainnet.up.sql": &bintree{_1633061096_update_current_network_to_mainnetUpSql, map[string]*bintree{}},
+	"doc.go": &bintree{docGo, map[string]*bintree{}},
 }}
 
 // RestoreAsset restores an asset under the given directory.
