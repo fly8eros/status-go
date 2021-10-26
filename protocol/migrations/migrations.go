@@ -910,7 +910,7 @@ func _1625018910_add_repply_message_activity_center_notification_fieldUpSql() (*
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "1625018910_add_repply_message_activity_center_notification_field.up.sql", size: 86, mode: os.FileMode(0644), modTime: time.Unix(1635229818, 0)}
+	info := bindataFileInfo{name: "1625018910_add_repply_message_activity_center_notification_field.up.sql", size: 86, mode: os.FileMode(0644), modTime: time.Unix(1635248564, 0)}
 	a := &asset{bytes: bytes, info: info, digest: [32]uint8{0xf2, 0x52, 0x12, 0x40, 0xd8, 0x6f, 0x71, 0x97, 0x46, 0x39, 0xaa, 0x74, 0x41, 0xcd, 0x45, 0x4c, 0xe8, 0xd9, 0xe2, 0x56, 0x8e, 0x78, 0x18, 0x62, 0xf6, 0xa8, 0x36, 0xe9, 0x9a, 0x1f, 0xc, 0xb1}}
 	return a, nil
 }
@@ -930,7 +930,7 @@ func _1625762506_add_deleted_messagesUpSql() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "1625762506_add_deleted_messages.up.sql", size: 357, mode: os.FileMode(0644), modTime: time.Unix(1635229818, 0)}
+	info := bindataFileInfo{name: "1625762506_add_deleted_messages.up.sql", size: 357, mode: os.FileMode(0644), modTime: time.Unix(1635248564, 0)}
 	a := &asset{bytes: bytes, info: info, digest: [32]uint8{0xd5, 0x61, 0x42, 0xb6, 0x8c, 0x7f, 0x2d, 0xec, 0xa9, 0x6d, 0x3d, 0x0, 0xa3, 0x32, 0xd8, 0x4a, 0x38, 0x5c, 0x97, 0xfc, 0x68, 0xde, 0xa9, 0xb7, 0xd8, 0xde, 0xb, 0x29, 0x93, 0xdc, 0x81, 0xf8}}
 	return a, nil
 }
@@ -950,7 +950,7 @@ func _1627388946_add_communities_synced_atUpSql() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "1627388946_add_communities_synced_at.up.sql", size: 87, mode: os.FileMode(0644), modTime: time.Unix(1635229818, 0)}
+	info := bindataFileInfo{name: "1627388946_add_communities_synced_at.up.sql", size: 87, mode: os.FileMode(0644), modTime: time.Unix(1635248564, 0)}
 	a := &asset{bytes: bytes, info: info, digest: [32]uint8{0xc1, 0xbd, 0x9b, 0x6a, 0xc9, 0x1a, 0x7a, 0x34, 0xcf, 0x5f, 0x80, 0x9e, 0x8c, 0x1c, 0xc0, 0xec, 0x4e, 0x78, 0xb0, 0x2d, 0x15, 0x77, 0x38, 0x4a, 0x6a, 0x5, 0x84, 0xf5, 0x8d, 0x8b, 0xbe, 0x9}}
 	return a, nil
 }
@@ -970,7 +970,7 @@ func _1628280060_createUsermessagesIndexSql() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "1628280060_create-usermessages-index.sql", size: 80, mode: os.FileMode(0644), modTime: time.Unix(1635229818, 0)}
+	info := bindataFileInfo{name: "1628280060_create-usermessages-index.sql", size: 80, mode: os.FileMode(0644), modTime: time.Unix(1635248564, 0)}
 	a := &asset{bytes: bytes, info: info, digest: [32]uint8{0x10, 0x6f, 0x70, 0x47, 0x40, 0xab, 0xa8, 0x60, 0xe0, 0xf9, 0x8, 0x7e, 0x19, 0x9d, 0xba, 0x33, 0x16, 0xfc, 0x3c, 0xdc, 0xa8, 0xa6, 0x53, 0x61, 0x39, 0x82, 0x91, 0xcf, 0x69, 0xd8, 0xf2, 0xcf}}
 	return a, nil
 }
@@ -990,7 +990,7 @@ func _1632303896_modify_contacts_tableUpSql() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "1632303896_modify_contacts_table.up.sql", size: 1574, mode: os.FileMode(0644), modTime: time.Unix(1635229818, 0)}
+	info := bindataFileInfo{name: "1632303896_modify_contacts_table.up.sql", size: 1574, mode: os.FileMode(0644), modTime: time.Unix(1635248564, 0)}
 	a := &asset{bytes: bytes, info: info, digest: [32]uint8{0x81, 0x1e, 0x6c, 0x3c, 0xd, 0xd7, 0x7d, 0xbb, 0x19, 0xbc, 0xe4, 0x7, 0xfd, 0xf8, 0x66, 0x6d, 0x78, 0xf6, 0x4, 0xe6, 0x51, 0xe4, 0xe6, 0xdc, 0xe, 0x5a, 0x2e, 0xac, 0xe6, 0xe7, 0x24, 0x69}}
 	return a, nil
 }
@@ -1010,7 +1010,7 @@ func _1633349838_add_emoji_column_in_chatsUpSql() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "1633349838_add_emoji_column_in_chats.up.sql", size: 52, mode: os.FileMode(0644), modTime: time.Unix(1635229818, 0)}
+	info := bindataFileInfo{name: "1633349838_add_emoji_column_in_chats.up.sql", size: 52, mode: os.FileMode(0644), modTime: time.Unix(1635248564, 0)}
 	a := &asset{bytes: bytes, info: info, digest: [32]uint8{0xcb, 0x33, 0xcb, 0x3b, 0xa9, 0x99, 0x77, 0x6a, 0xea, 0xc4, 0x39, 0xd7, 0xa1, 0x49, 0xa7, 0xdf, 0xff, 0x72, 0xda, 0x34, 0x21, 0x67, 0x66, 0xca, 0x65, 0x46, 0x1, 0xa6, 0x4e, 0xf9, 0x38, 0x86}}
 	return a, nil
 }
