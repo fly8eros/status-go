@@ -7,6 +7,7 @@ import (
 	"errors"
 	"math/big"
 	"reflect"
+	"strings"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
@@ -415,6 +416,12 @@ func updateOrInsertTransfers(chainID uint64, creator statementCreator, transfers
 	if err != nil {
 		return err
 	}
+
+	updateBlocks, err := creator.Prepare("UPDATE blocks SET blk_hash=? WHERE address=? AND blk_number=? AND network_id=?")
+	if err != nil {
+		return err
+	}
+
 	for _, t := range transfers {
 		res, err := update.Exec(&JSONBlob{t.Transaction}, t.From, &JSONBlob{t.Receipt}, t.Timestamp, t.Address, t.ID)
 
@@ -431,6 +438,23 @@ func updateOrInsertTransfers(chainID uint64, creator statementCreator, transfers
 
 		_, err = insert.Exec(chainID, t.ID, t.BlockHash, (*bigint.SQLBigInt)(t.BlockNumber), t.Timestamp, t.Address, &JSONBlob{t.Transaction}, t.From, &JSONBlob{t.Receipt}, &JSONBlob{t.Log}, t.Type)
 		if err != nil {
+			fkErr := strings.Contains(err.Error(),"FOREIGN KEY constraint failed")
+			if fkErr {
+				res, err = updateBlocks.Exec(t.BlockHash, t.Address, (*bigint.SQLBigInt)(t.BlockNumber), chainID)
+				if err != nil {
+					return err
+				}
+				affected, err = res.RowsAffected()
+				if err != nil {
+					return err
+				}
+				log.Info("try to fix `foreign key constraint failed`.","affected", affected, "network", chainID, "b-hash", t.BlockHash, "b-n", t.BlockNumber, "a", t.Address, "h", t.ID)
+
+				_, err = insert.Exec(chainID, t.ID, t.BlockHash, (*bigint.SQLBigInt)(t.BlockNumber), t.Timestamp, t.Address, &JSONBlob{t.Transaction}, t.From, &JSONBlob{t.Receipt}, &JSONBlob{t.Log}, t.Type)
+				if err == nil {
+					continue
+				}
+			}
 			log.Error("can't save transfer", "b-hash", t.BlockHash, "b-n", t.BlockNumber, "a", t.Address, "h", t.ID)
 			return err
 		}
