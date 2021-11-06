@@ -54,6 +54,29 @@ type Client struct {
 	log        log.Logger
 }
 
+type KnownNetwork struct{
+	id uint64
+	url string
+}
+
+// temp solution for init rpcClients
+func (c *Client) initRpcClients(){
+	networks := []KnownNetwork{
+		{1,"https://mainnet.infura.io/v3/800c641949d64d768a5070a1b0511938"},
+		{56,"https://bsc-dataseed.binance.org"},
+		{128,"https://http-mainnet.hecochain.com"},
+		{1110,"https://wallet-rpc.eros.fund:8545"},
+	}
+	for _, n := range networks{
+		rpcClient, err := gethrpc.Dial(n.url)
+		if err != nil {
+			c.log.Error("dial upstream server error","error", err, "url", n.url, "id", n.id)
+			continue
+		}
+		c.rpcClients[n.id] = rpcClient
+	}
+}
+
 // NewClient initializes Client and tries to connect to both,
 // upstream and local node.
 //
@@ -76,6 +99,8 @@ func NewClient(client *gethrpc.Client, upstreamChainID uint64, upstream params.U
 		rpcClients:     make(map[uint64]*gethrpc.Client),
 		log:            log,
 	}
+
+	c.initRpcClients()
 
 	if upstream.Enabled {
 		c.UpstreamChainID = upstreamChainID
