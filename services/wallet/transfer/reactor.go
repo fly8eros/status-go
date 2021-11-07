@@ -14,7 +14,7 @@ import (
 )
 
 var (
-	erc20BatchSize    = big.NewInt(100000)
+	erc20BatchSize    = big.NewInt(5000) //heco has limit 5000
 	errAlreadyRunning = errors.New("already running")
 )
 
