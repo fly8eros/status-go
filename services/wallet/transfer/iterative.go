@@ -71,7 +71,7 @@ func (d *IterativeDownloader) Next(parent context.Context) ([]*DBHeader, *big.In
 	log.Info("load erc20 transfers in range", "from", from, "to", to)
 	headers, err := d.downloader.GetHeadersInRange(parent, from, to)
 	if err != nil {
-		log.Error("failed to get transfer in between two bloks", "from", from, "to", to, "error", err)
+		log.Error("failed to get transfer in between two blocks", "from", from, "to", to, "error", err)
 		return nil, nil, nil, err
 	}
 
