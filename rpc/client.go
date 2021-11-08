@@ -55,25 +55,35 @@ type Client struct {
 }
 
 type KnownNetwork struct{
-	id uint64
-	url string
+	Id uint64
+	Url string
+}
+
+var KnownNetworks = []KnownNetwork{
+	{1,"https://mainnet.infura.io/v3/800c641949d64d768a5070a1b0511938"},
+	{56,"https://bsc-dataseed.binance.org"},
+	{128,"https://http-mainnet.hecochain.com"},
+	{1110,"https://wallet-rpc.eros.fund:8545"},
+}
+
+func FindKnownNetworkById(id uint64) *KnownNetwork {
+	for _, n := range KnownNetworks{
+		if n.Id == id{
+			return &n
+		}
+	}
+	return nil
 }
 
 // temp solution for init rpcClients
 func (c *Client) initRpcClients(){
-	networks := []KnownNetwork{
-		{1,"https://mainnet.infura.io/v3/800c641949d64d768a5070a1b0511938"},
-		{56,"https://bsc-dataseed.binance.org"},
-		{128,"https://http-mainnet.hecochain.com"},
-		{1110,"https://wallet-rpc.eros.fund:8545"},
-	}
-	for _, n := range networks{
-		rpcClient, err := gethrpc.Dial(n.url)
+	for _, n := range KnownNetworks{
+		rpcClient, err := gethrpc.Dial(n.Url)
 		if err != nil {
-			c.log.Error("dial upstream server error","error", err, "url", n.url, "id", n.id)
+			c.log.Error("dial upstream server error","error", err, "url", n.Url, "id", n.Id)
 			continue
 		}
-		c.rpcClients[n.id] = rpcClient
+		c.rpcClients[n.Id] = rpcClient
 	}
 }
 
