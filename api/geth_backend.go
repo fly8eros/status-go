@@ -110,6 +110,10 @@ func (b *GethStatusBackend) Transactor() *transactions.Transactor {
 	return b.transactor
 }
 
+func (b *GethStatusBackend) PersonalAPI() *personal.PublicAPI {
+	return b.personalAPI
+}
+
 // SelectedAccountKeyID returns a Whisper key ID of the selected chat key pair.
 func (b *GethStatusBackend) SelectedAccountKeyID() string {
 	return b.selectedAccountKeyID

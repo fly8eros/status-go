@@ -205,7 +205,7 @@ func (n *StatusNode) startWithDB(config *params.NodeConfig, accs *accounts.Manag
 	}
 	n.config = config
 
-	if err := n.setupRPCClient(); err != nil {
+	if err := n.SetupRPCClient(); err != nil {
 		return err
 	}
 
@@ -225,7 +225,7 @@ func (n *StatusNode) startGethNode() error {
 	return n.gethNode.Start()
 }
 
-func (n *StatusNode) setupRPCClient() (err error) {
+func (n *StatusNode) SetupRPCClient() (err error) {
 	// setup RPC client
 	gethNodeClient, err := n.gethNode.Attach()
 	if err != nil {

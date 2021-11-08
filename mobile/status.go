@@ -5,7 +5,9 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/status-im/status-go/rpc"
 	"os"
+	"strconv"
 	"unsafe"
 
 	validator "gopkg.in/go-playground/validator.v9"
@@ -694,5 +696,33 @@ func ConvertToKeycardAccount(keyStoreDir, accountData, settingsJSON, password, n
 	if err != nil {
 		return makeJSONResponse(err)
 	}
+	return makeJSONResponse(nil)
+}
+
+func SwitchChain(chainId string) string {
+	log.Debug("call to SwitchChain","chainID",chainId)
+	chainID,err := strconv.ParseUint(chainId, 10, 64)
+	if err != nil{
+		return makeJSONResponse(err)
+	}
+
+	knownNetwork := rpc.FindKnownNetworkById(chainID)
+	if knownNetwork == nil{
+		return makeJSONResponse(errors.New(fmt.Sprintf("could not find known network by id: %s",chainID)))
+	}
+
+	statusNode := statusBackend.StatusNode()
+	config := statusNode.Config()
+	config.NetworkID = chainID
+	config.UpstreamConfig.URL = knownNetwork.Url
+	err = statusNode.SetupRPCClient()
+	if err != nil{
+		return makeJSONResponse(err)
+	}
+
+	transactor := statusBackend.Transactor()
+	transactor.SetNetworkID(chainID)
+	transactor.SetRPC(statusNode.RPCClient(),rpc.DefaultCallTimeout)
+	statusBackend.PersonalAPI().SetRPC(statusNode.RPCClient(),rpc.DefaultCallTimeout)
 	return makeJSONResponse(nil)
 }
