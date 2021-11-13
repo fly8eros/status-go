@@ -198,7 +198,7 @@ func (s *Service) StartWalletWatcher() {
 							MaxKnownBlocks: maxKnownBlocks,
 						})
 					}
-				} else if event.Type == transfer.EventRecentHistoryReady {
+				} else if event.Type == transfer.EventRecentHistoryReady && event.BlockNumber != nil{
 					for _, address := range event.Accounts {
 						if _, ok := maxKnownBlocks[address]; !ok {
 							maxKnownBlocks[address] = event.BlockNumber

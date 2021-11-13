@@ -15,6 +15,7 @@ import (
 )
 
 var numberOfBlocksCheckedPerIteration = 40
+var lastHeadMap = make(map[uint64]*big.Int) //map[chainID]blockNumber
 
 type ethHistoricalCommand struct {
 	db           *Database
@@ -137,10 +138,31 @@ func (c *controlCommand) LoadTransfers(ctx context.Context, downloader *ETHDownl
 	return loadTransfers(ctx, c.accounts, c.block, c.db, c.chainClient, limit, make(map[common.Address][]*big.Int))
 }
 
+func ReadyToCheckRecentHistory(parent context.Context, chainClient *chain.Client) (bool, error) {
+	ctx, cancel := context.WithTimeout(parent, 3*time.Second)
+	latestHead, err := chainClient.HeaderByNumber(ctx, nil)
+	cancel()
+	if err != nil {
+		return false, err
+	}
+
+	lastHead,ok := lastHeadMap[chainClient.ChainID]
+	if !ok {
+		lastHeadMap[chainClient.ChainID] = latestHead.Number
+		return false, nil
+	}
+
+	if big.NewInt(0).Sub(latestHead.Number, lastHead).Cmp(two) == -1{
+		return false, nil
+	}
+
+	return true, nil
+}
+
 func (c *controlCommand) Run(parent context.Context) error {
 	log.Info("start control command")
 	ctx, cancel := context.WithTimeout(parent, 3*time.Second)
-	head, err := c.chainClient.HeaderByNumber(ctx, nil)
+	latestHead, err := c.chainClient.HeaderByNumber(ctx, nil)
 	cancel()
 	if err != nil {
 		if c.NewError(err) {
@@ -154,7 +176,40 @@ func (c *controlCommand) Run(parent context.Context) error {
 		Accounts: c.accounts,
 	})
 
-	log.Info("current head is", "block number", head.Number)
+	log.Info("current head is", "block number", latestHead.Number.Text(10))
+
+	chainId := c.chainClient.ChainID
+	lastHead,ok := lastHeadMap[chainId]
+	if !ok {
+		lastHead = latestHead.Number
+		lastHeadMap[chainId] = lastHead
+		c.feed.Send(Event{
+			Type:        EventRecentHistoryReady,
+			Accounts:    c.accounts,
+			BlockNumber: nil,
+		})
+		return nil
+	}
+
+	if big.NewInt(0).Sub(latestHead.Number, lastHead).Cmp(two) == -1{
+		c.feed.Send(Event{
+			Type:        EventRecentHistoryReady,
+			Accounts:    c.accounts,
+			BlockNumber: nil,
+		})
+		return nil
+	}
+
+	ctx, cancel = context.WithTimeout(parent, 3*time.Second)
+	head, err := c.chainClient.HeaderByNumber(ctx, big.NewInt(0).Sub(latestHead.Number,two))
+	cancel()
+	if err != nil {
+		if c.NewError(err) {
+			return nil
+		}
+		return err
+	}
+
 	lastKnownEthBlocks, accountsWithoutHistory, err := c.block.GetLastKnownBlockByAddresses(c.chainClient.ChainID, c.accounts)
 	if err != nil {
 		log.Error("failed to load last head from database", "error", err)
@@ -259,7 +314,9 @@ func (c *controlCommand) Run(parent context.Context) error {
 		BlockNumber: target,
 	})
 
-	log.Info("end control command")
+	lastHeadMap[chainId] = latestHead.Number
+
+	log.Info("end control command", "latestHead", latestHead.Number.Text(10), "lastHead", lastHead.Text(10))
 	return err
 }
 

@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"github.com/status-im/status-go/services/wallet/transfer"
 	"math/big"
 	"time"
 
@@ -192,6 +193,11 @@ func (c *watchTransactionCommand) Run(ctx context.Context) error {
 
 	if isPending {
 		return errors.New("transaction is pending")
+	}
+
+	ready, err := transfer.ReadyToCheckRecentHistory(ctx, c.client)
+	if err != nil || !ready {
+		return errors.New("block is not ready to check")
 	}
 
 	return nil
