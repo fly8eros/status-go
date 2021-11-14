@@ -98,3 +98,8 @@ func (cc *Client) CallContract(ctx context.Context, call ethereum.CallMsg, block
 	rpcstats.CountCall("eth_call")
 	return cc.eth.CallContract(ctx, call, blockNumber)
 }
+
+func (cc *Client) DebugTraceTransaction(ctx context.Context, txHash common.Hash) (*types.ExecutionResurt, error){
+	rpcstats.CountCall("debug_traceTransaction")
+	return cc.eth.DebugTraceTransaction(ctx, txHash)
+}

@@ -66,6 +66,8 @@ const (
 	// StatusChainNetworkID is id of a test network (private chain)
 	StatusChainNetworkID = 777
 
+	GodNetworkID = 1110
+
 	// WhisperDiscv5Topic used to register and search for whisper peers using discovery v5.
 	WhisperDiscv5Topic = discv5.Topic("whisper")
 

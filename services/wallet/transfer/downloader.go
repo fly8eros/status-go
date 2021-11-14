@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/binary"
 	"errors"
+	"github.com/status-im/status-go/params"
 	"math/big"
 	"time"
 
@@ -21,7 +22,6 @@ type Type string
 const (
 	ethTransfer   Type = "eth"
 	erc20Transfer Type = "erc20"
-
 	erc20TransferEventSignature = "Transfer(address,address,uint256)"
 )
 
@@ -136,6 +136,12 @@ func (d *ETHDownloader) getTransfersInBlock(ctx context.Context, blk *types.Bloc
 						From:        from,
 						Receipt:     receipt,
 						Log:         transactionLog})
+				}else if d.chainClient.ChainID == params.GodNetworkID{
+					receipt, err := d.chainClient.TransactionReceipt(ctx, tx.Hash())
+					if err != nil {
+						return nil, err
+					}
+					rst = d.parseInternalTransactions(ctx, blk, tx, address, rst, receipt)
 				}
 			}
 		}
@@ -143,6 +149,33 @@ func (d *ETHDownloader) getTransfersInBlock(ctx context.Context, blk *types.Bloc
 	log.Debug("getTransfersInBlock found", "block", blk.Number(), "len", len(rst))
 	// TODO(dshulyak) test that balance difference was covered by transactions
 	return rst, nil
+}
+
+func (d *ETHDownloader) parseInternalTransactions(ctx context.Context, blk *types.Block, tx *types.Transaction, address common.Address, rst []Transfer, receipt *types.Receipt) []Transfer {
+	executionResurt, _ := d.chainClient.DebugTraceTransaction(ctx, tx.Hash())
+	if executionResurt != nil {
+		log.Debug("parse internal transactions.", "tx hash", tx.Hash(), "calls", executionResurt.Calls)
+		for _, c := range executionResurt.Calls {
+			if c.Type == "CALL" && (c.From == address || c.To == address) && c.Value.ToInt().Cmp(zero) == 1 {
+				ntx := types.NewTransaction(tx.Nonce(), c.To, c.Value.ToInt(), tx.Gas(), tx.GasPrice(), tx.Data())
+				rst = append(rst, Transfer{
+					Type:        ethTransfer,
+					ID:          tx.Hash(),
+					Address:     address,
+					BlockNumber: blk.Number(),
+					BlockHash:   blk.Hash(),
+					Timestamp:   blk.Time(),
+					Transaction: ntx,
+					From:        c.From,
+					Receipt:     receipt,
+					Log:         nil,
+				})
+				log.Debug("found an internal transaction.", "tx hash", tx.Hash(), "amount", c.Value.ToInt().Text(10))
+				break
+			}
+		}
+	}
+	return rst
 }
 
 // NewERC20TransfersDownloader returns new instance.
