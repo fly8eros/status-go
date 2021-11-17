@@ -136,13 +136,15 @@ func (d *ETHDownloader) getTransfersInBlock(ctx context.Context, blk *types.Bloc
 						From:        from,
 						Receipt:     receipt,
 						Log:         transactionLog})
-				}else if d.chainClient.ChainID == params.GodNetworkID{
-					receipt, err := d.chainClient.TransactionReceipt(ctx, tx.Hash())
-					if err != nil {
-						return nil, err
-					}
-					rst = d.parseInternalTransactions(ctx, blk, tx, address, rst, receipt)
 				}
+			}
+
+			if d.chainClient.ChainID == params.GodNetworkID{
+				receipt, err := d.chainClient.TransactionReceipt(ctx, tx.Hash())
+				if err != nil {
+					return nil, err
+				}
+				rst = d.parseInternalTransactions(ctx, blk, tx, address, rst, receipt)
 			}
 		}
 	}
