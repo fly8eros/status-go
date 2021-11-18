@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"math/big"
+	"strconv"
 	"sync"
 	"time"
 
@@ -108,7 +109,8 @@ func (t *Transactor) SendTransactionWithSignature(args SendTxArgs, sig []byte) (
 		// nonce should be incremented only if tx completed without error
 		// and if no other transactions have been sent while signing the current one.
 		if err == nil {
-			t.localNonce.Store(args.From, uint64(*args.Nonce)+1)
+			localNonceCacheKey := types.Bytes2Hex(strconv.AppendUint(args.From.Bytes(), t.networkID, 10))
+			t.localNonce.Store(localNonceCacheKey, uint64(*args.Nonce)+1)
 		}
 		t.addrLock.UnlockAddr(args.From)
 	}()
@@ -251,7 +253,9 @@ func (t *Transactor) validateAndPropagate(selectedAccount *account.SelectedExtKe
 	}
 	t.addrLock.LockAddr(args.From)
 	var localNonce uint64
-	if val, ok := t.localNonce.Load(args.From); ok {
+
+	localNonceCacheKey := types.Bytes2Hex(strconv.AppendUint(args.From.Bytes(), t.networkID, 10))
+	if val, ok := t.localNonce.Load(localNonceCacheKey); ok {
 		localNonce = val.(uint64)
 	}
 	var nonce uint64
@@ -259,7 +263,7 @@ func (t *Transactor) validateAndPropagate(selectedAccount *account.SelectedExtKe
 		// nonce should be incremented only if tx completed without error
 		// if upstream node returned nonce higher than ours we will stick to it
 		if err == nil && args.Nonce == nil {
-			t.localNonce.Store(args.From, nonce+1)
+			t.localNonce.Store(localNonceCacheKey, nonce+1)
 		}
 		t.addrLock.UnlockAddr(args.From)
 
@@ -411,7 +415,8 @@ func (t *Transactor) getTransactionNonce(args SendTxArgs) (newNonce uint64, err 
 	)
 
 	// get the local nonce
-	if val, ok := t.localNonce.Load(args.From); ok {
+	localNonceCacheKey := types.Bytes2Hex(strconv.AppendUint(args.From.Bytes(), t.networkID, 10))
+	if val, ok := t.localNonce.Load(localNonceCacheKey); ok {
 		localNonce = val.(uint64)
 	}
 
