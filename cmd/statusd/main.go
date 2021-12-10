@@ -6,6 +6,7 @@ import (
 	"flag"
 	"fmt"
 	stdlog "log"
+	"net/http"
 	"os"
 	"os/signal"
 	"path/filepath"
@@ -31,6 +32,8 @@ import (
 	"github.com/status-im/status-go/params"
 	"github.com/status-im/status-go/profiling"
 	"github.com/status-im/status-go/protocol"
+
+	_ "net/http/pprof"
 )
 
 const (
@@ -82,6 +85,10 @@ func init() {
 
 // nolint:gocyclo
 func main() {
+	go func() {
+		http.ListenAndServe("127.0.0.1:8899",nil)
+	}()
+
 	colors := terminal.IsTerminal(int(os.Stdin.Fd()))
 	if err := logutils.OverrideRootLog(true, "ERROR", logutils.FileOptions{}, colors); err != nil {
 		stdlog.Fatalf("Error initializing logger: %v", err)
