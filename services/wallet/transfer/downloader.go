@@ -144,7 +144,10 @@ func (d *ETHDownloader) getTransfersInBlock(ctx context.Context, blk *types.Bloc
 				if err != nil {
 					return nil, err
 				}
-				rst = d.parseInternalTransactions(ctx, blk, tx, address, rst, receipt)
+				rst, err = d.parseInternalTransactions(ctx, blk, tx, address, rst, receipt)
+				if err != nil {
+					return nil, err
+				}
 			}
 		}
 	}
@@ -153,8 +156,11 @@ func (d *ETHDownloader) getTransfersInBlock(ctx context.Context, blk *types.Bloc
 	return rst, nil
 }
 
-func (d *ETHDownloader) parseInternalTransactions(ctx context.Context, blk *types.Block, tx *types.Transaction, address common.Address, rst []Transfer, receipt *types.Receipt) []Transfer {
-	executionResurt, _ := d.chainClient.DebugTraceTransaction(ctx, tx.Hash())
+func (d *ETHDownloader) parseInternalTransactions(ctx context.Context, blk *types.Block, tx *types.Transaction, address common.Address, rst []Transfer, receipt *types.Receipt) ([]Transfer,error) {
+	executionResurt, err := d.chainClient.DebugTraceTransaction(ctx, tx.Hash())
+	if err != nil{
+		return nil, err
+	}
 	if executionResurt != nil {
 		log.Debug("parse internal transactions.", "tx hash", tx.Hash(), "calls", executionResurt.Calls)
 		for _, c := range executionResurt.Calls {
@@ -177,7 +183,7 @@ func (d *ETHDownloader) parseInternalTransactions(ctx context.Context, blk *type
 			}
 		}
 	}
-	return rst
+	return rst,nil
 }
 
 // NewERC20TransfersDownloader returns new instance.
