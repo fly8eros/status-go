@@ -803,7 +803,7 @@ func (b *GethStatusBackend) CallPrivateRPC(inputJSON string) (string, error) {
 
 // SendTransaction creates a new transaction and waits until it's complete.
 func (b *GethStatusBackend) SendTransaction(sendArgs transactions.SendTxArgs, password string) (hash types.Hash, err error) {
-	verifiedAccount, err := b.getVerifiedWalletAccount(sendArgs.From.String(), password)
+	verifiedAccount, err := b.GetVerifiedWalletAccount(sendArgs.From.String(), password)
 	if err != nil {
 		return hash, err
 	}
@@ -837,7 +837,7 @@ func (b *GethStatusBackend) HashTransaction(sendArgs transactions.SendTxArgs) (t
 // SignMessage checks the pwd vs the selected account and passes on the signParams
 // to personalAPI for message signature
 func (b *GethStatusBackend) SignMessage(rpcParams personal.SignParams) (types.HexBytes, error) {
-	verifiedAccount, err := b.getVerifiedWalletAccount(rpcParams.Address, rpcParams.Password)
+	verifiedAccount, err := b.GetVerifiedWalletAccount(rpcParams.Address, rpcParams.Password)
 	if err != nil {
 		return types.HexBytes{}, err
 	}
@@ -852,7 +852,7 @@ func (b *GethStatusBackend) Recover(rpcParams personal.RecoverParams) (types.Add
 
 // SignTypedData accepts data and password. Gets verified account and signs typed data.
 func (b *GethStatusBackend) SignTypedData(typed typeddata.TypedData, address string, password string) (types.HexBytes, error) {
-	account, err := b.getVerifiedWalletAccount(address, password)
+	account, err := b.GetVerifiedWalletAccount(address, password)
 	if err != nil {
 		return types.HexBytes{}, err
 	}
@@ -866,7 +866,7 @@ func (b *GethStatusBackend) SignTypedData(typed typeddata.TypedData, address str
 
 // SignTypedDataV4 accepts data and password. Gets verified account and signs typed data.
 func (b *GethStatusBackend) SignTypedDataV4(typed signercore.TypedData, address string, password string) (types.HexBytes, error) {
-	account, err := b.getVerifiedWalletAccount(address, password)
+	account, err := b.GetVerifiedWalletAccount(address, password)
 	if err != nil {
 		return types.HexBytes{}, err
 	}
@@ -898,7 +898,7 @@ func (b *GethStatusBackend) HashTypedDataV4(typed signercore.TypedData) (types.H
 	return types.Hash(hash), err
 }
 
-func (b *GethStatusBackend) getVerifiedWalletAccount(address, password string) (*account.SelectedExtKey, error) {
+func (b *GethStatusBackend) GetVerifiedWalletAccount(address, password string) (*account.SelectedExtKey, error) {
 	config := b.StatusNode().Config()
 
 	db := accounts.NewDB(b.appDB)

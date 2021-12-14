@@ -393,7 +393,7 @@ func TestBackendGetVerifiedAccount(t *testing.T) {
 	require.NoError(t, backend.ensureAppDBOpened(multiaccounts.Account{KeyUID: "0x1"}, password))
 	config, err := params.NewNodeConfig(tmpdir, 178733)
 	require.NoError(t, err)
-	// this is for StatusNode().Config() call inside of the getVerifiedWalletAccount
+	// this is for StatusNode().Config() call inside of the GetVerifiedWalletAccount
 	require.NoError(t, backend.StartNode(config))
 	defer func() {
 		require.NoError(t, backend.StopNode())
@@ -403,7 +403,7 @@ func TestBackendGetVerifiedAccount(t *testing.T) {
 		pkey, err := gethcrypto.GenerateKey()
 		require.NoError(t, err)
 		address := gethcrypto.PubkeyToAddress(pkey.PublicKey)
-		key, err := backend.getVerifiedWalletAccount(address.String(), password)
+		key, err := backend.GetVerifiedWalletAccount(address.String(), password)
 		require.EqualError(t, err, transactions.ErrAccountDoesntExist.Error())
 		require.Nil(t, key)
 	})
@@ -416,7 +416,7 @@ func TestBackendGetVerifiedAccount(t *testing.T) {
 		_, err = backend.AccountManager().ImportAccount(pkey, password)
 		require.NoError(t, err)
 		require.NoError(t, db.SaveAccounts([]accounts.Account{{Address: address}}))
-		key, err := backend.getVerifiedWalletAccount(address.String(), "wrong-password")
+		key, err := backend.GetVerifiedWalletAccount(address.String(), "wrong-password")
 		require.EqualError(t, err, "could not decrypt key with given password")
 		require.Nil(t, key)
 	})
@@ -429,7 +429,7 @@ func TestBackendGetVerifiedAccount(t *testing.T) {
 		_, err = backend.AccountManager().ImportAccount(pkey, password)
 		require.NoError(t, err)
 		require.NoError(t, db.SaveAccounts([]accounts.Account{{Address: address}}))
-		key, err := backend.getVerifiedWalletAccount(address.String(), password)
+		key, err := backend.GetVerifiedWalletAccount(address.String(), password)
 		require.NoError(t, err)
 		require.Equal(t, address, key.Address)
 	})

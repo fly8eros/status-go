@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/status-im/status-go/rpc"
 	"os"
 	"strconv"
@@ -725,4 +726,13 @@ func SwitchChain(chainId string) string {
 	transactor.SetRPC(statusNode.RPCClient(),rpc.DefaultCallTimeout)
 	statusBackend.PersonalAPI().SetRPC(statusNode.RPCClient(),rpc.DefaultCallTimeout)
 	return makeJSONResponse(nil)
+}
+
+func ExportPrivateKey(address, password string) string {
+	selectedAccount, err := statusBackend.GetVerifiedWalletAccount(address, password)
+	if err != nil{
+		return makeJSONResponse(err)
+	}
+
+	return types.Bytes2Hex(crypto.FromECDSA(selectedAccount.AccountKey.PrivateKey))
 }
