@@ -709,7 +709,7 @@ func SwitchChain(chainId string) string {
 
 	knownNetwork := rpc.FindKnownNetworkById(chainID)
 	if knownNetwork == nil{
-		return makeJSONResponse(errors.New(fmt.Sprintf("could not find known network by id: %s",chainID)))
+		return makeJSONResponse(errors.New(fmt.Sprintf("could not find known network by id: %d",chainID)))
 	}
 
 	statusNode := statusBackend.StatusNode()
