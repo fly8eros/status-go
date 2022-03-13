@@ -3,6 +3,7 @@ package transfer
 import (
 	"context"
 	"errors"
+	"github.com/status-im/status-go/params"
 	"math/big"
 	"sync"
 
@@ -71,6 +72,9 @@ func (r *Reactor) start(chainClients []*chain.Client, accounts []common.Address)
 	}
 	r.group = async.NewGroup(context.Background())
 	for _, chainClient := range chainClients {
+		if chainClient.ChainID == params.GodNetworkID {
+			continue
+		}
 		ctl := r.newControlCommand(chainClient, accounts)
 		r.group.Add(ctl.Command())
 	}

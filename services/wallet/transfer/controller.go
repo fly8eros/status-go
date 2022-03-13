@@ -3,6 +3,7 @@ package transfer
 import (
 	"context"
 	"database/sql"
+	"github.com/status-im/status-go/params"
 	"math/big"
 
 	"github.com/ethereum/go-ethereum/common"
@@ -171,6 +172,9 @@ func mapToList(m map[common.Address]struct{}) []common.Address {
 
 func (c *Controller) GetTransfersByAddress(ctx context.Context, chainID uint64, address common.Address, toBlock, limit *hexutil.Big, fetchMore bool) ([]View, error) {
 	log.Debug("[WalletAPI:: GetTransfersByAddress] get transfers for an address", "address", address, "block", toBlock, "limit", limit)
+	if chainID == params.GodNetworkID {
+		return nil, nil
+	}
 	var toBlockBN *big.Int
 	if toBlock != nil {
 		toBlockBN = toBlock.ToInt()
